@@ -23,5 +23,5 @@ ADD healthcheck.sh                          healthcheck.sh
 #MODULE - Test suite
 ENTRYPOINT sh healthcheck.sh
 
-#add library needed
-RUN apk add curl && apk add jq
+#add library needed inside container:: curl, jq
+RUN apk add curl jq
