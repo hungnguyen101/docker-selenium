@@ -1,0 +1,74 @@
+version: "3"
+services:
+  hub:
+    image: selenium/hub:4.3.0
+    ports:
+      - "4444:4444" #it could be anything
+
+  chrome:
+    image: selenium/node-chrome:4.3.0
+    shm_size: '2g'
+    depends_on:
+      - hub
+    environment:
+      - SE_EVENT_BUS_HOST=hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  firefox:
+    image: selenium/node-firefox:4.3.0
+    shm_size: '2g' #avoid firefox out of memory > crash :: shared memory
+    depends_on:
+      - hub
+    environment:
+      - SE_EVENT_BUS_HOST=hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  search-module-firefox:
+    image: gahung206/selenium-docker
+    depends_on:
+      - chrome
+      - firefox
+    environment:
+      - BROWSER=firefox
+      - HUB_HOST=hub
+      - MODULE=search-module.xml
+    volumes:
+    - ./search-result-firefox:/usr/share/udemy/test-output
+
+  search-module-chrome:
+    image: gahung206/selenium-docker
+    depends_on:
+      - chrome
+      - firefox
+    environment:
+      - BROWSER=chrome
+      - HUB_HOST=hub
+      - MODULE=search-module.xml
+    volumes:
+      - ./search-result-chrome:/usr/share/udemy/test-output
+
+  book-flight-module-chrome:
+    image: gahung206/selenium-docker
+    depends_on:
+      - chrome
+      - firefox
+    environment:
+      - BROWSER=chrome
+      - HUB_HOST=hub
+      - MODULE=book-flight-module.xml
+    volumes:
+      - ./book-flight-result-chrome:/usr/share/udemy/test-output
+
+  book-flight-module-firefox:
+    image: gahung206/selenium-docker
+    depends_on:
+      - chrome
+      - firefox
+    environment:
+      - BROWSER=firefox
+      - HUB_HOST=hub
+      - MODULE=book-flight-module.xml
+    volumes:
+      - ./book-flight-result-firefox:/usr/share/udemy/test-output
