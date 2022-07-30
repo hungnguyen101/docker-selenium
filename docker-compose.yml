@@ -35,7 +35,7 @@ services:
       - HUB_HOST=hub
       - MODULE=search-module.xml
     volumes:
-    - ./search-result-firefox:/usr/share/udemy/test-output
+    - ./output/search-result-firefox:/usr/share/udemy/test-output
 
   search-module-chrome:
     image: gahung206/selenium-docker
@@ -47,7 +47,7 @@ services:
       - HUB_HOST=hub
       - MODULE=search-module.xml
     volumes:
-      - ./search-result-chrome:/usr/share/udemy/test-output
+      - ./output/search-result-chrome:/usr/share/udemy/test-output
 
   book-flight-module-chrome:
     image: gahung206/selenium-docker
@@ -59,7 +59,7 @@ services:
       - HUB_HOST=hub
       - MODULE=book-flight-module.xml
     volumes:
-      - ./book-flight-result-chrome:/usr/share/udemy/test-output
+      - ./ouput/book-flight-result-chrome:/usr/share/udemy/test-output
 
   book-flight-module-firefox:
     image: gahung206/selenium-docker
@@ -71,4 +71,4 @@ services:
       - HUB_HOST=hub
       - MODULE=book-flight-module.xml
     volumes:
-      - ./book-flight-result-firefox:/usr/share/udemy/test-output
+      - ./output/book-flight-result-firefox:/usr/share/udemy/test-output
