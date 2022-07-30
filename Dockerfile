@@ -25,3 +25,4 @@ ENTRYPOINT sh healthcheck.sh
 
 #add library needed inside container:: curl, jq
 RUN apk add curl jq
+RUN pwd
