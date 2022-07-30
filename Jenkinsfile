@@ -12,11 +12,13 @@ pipeline {
             }
             steps {
                 sh 'mvn clean package -DskipTests' //build jar files using maven
+                sh 'ls -al' //debug
             }
         }
         stage('Build Image') {
             steps {
                 script {
+                    sh 'ls -al' //debug
                 	app = docker.build("gahung206/selenium-docker") //build the image and store in the variable `app`
                 }
             }
