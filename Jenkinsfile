@@ -4,7 +4,7 @@ pipeline {
     //we only use slave node
     stages {
         stage('Build Jar') {
-            agent {
+            docker {
                 any {
                     image 'maven:3-alpine'
                     args '-v /root/.m2:/root/.m2'  //volume mapping for download anything in the machine
