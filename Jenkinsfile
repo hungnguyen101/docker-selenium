@@ -6,12 +6,12 @@ pipeline {
         stage('Build Jar') {
             agent {
                 docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'  //volume mapping for download anything in the machine
+                    image 'maven:3-alpine' //install alpine + maven
+                    args '-v /$HOME/.m2:/$HOME/.m2'  //volume mapping for download anything in the machine
                 }
             }
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh 'mvn clean package -DskipTests' //build jar files using maven
             }
         }
         stage('Build Image') {
