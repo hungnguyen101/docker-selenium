@@ -1,11 +1,14 @@
 FROM openjdk:19-jdk-alpine3.16
 
+#add library needed inside container:: curl, jq
+RUN apk add curl jq
+
 #create workspace && jump into in container
 WORKDIR  /usr/share/udemy
 
-ADD target/selenium-docker.jar              selenium-docker.jar
-ADD target/selenium-docker-tests.jar        selenium-docker-tests.jar
-ADD target/libs                             libs
+ADD /target/selenium-docker.jar              selenium-docker.jar
+ADD /target/selenium-docker-tests.jar        selenium-docker-tests.jar
+ADD /target/libs                             libs
 
 
 #in case of any dependency like .csv .json .xls
@@ -23,6 +26,3 @@ ADD healthcheck.sh                          healthcheck.sh
 #MODULE - Test suite
 ENTRYPOINT sh healthcheck.sh
 
-#add library needed inside container:: curl, jq
-RUN apk add curl jq
-RUN pwd

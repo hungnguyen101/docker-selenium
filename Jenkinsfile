@@ -7,7 +7,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine' //install alpine + maven
-                    args '-v /$HOME/.m2:/$HOME/.m2'  //volume mapping for download anything in the machine
+                    args '-v /$HOME/.m2:/root/.m2'  //volume mapping for download anything in the machine
                 }
             }
             steps {
@@ -18,6 +18,8 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
+                    echo "debug checking current location inside container"
+                    echo $PWD
                     sh 'ls -al' //debug
                 	app = docker.build("gahung206/selenium-docker") //build the image and store in the variable `app`
                 }
