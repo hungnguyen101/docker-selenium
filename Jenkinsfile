@@ -7,7 +7,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine' //install alpine + maven
-                    args '-v /$HOME/.m2:/root/.m2'  //volume mapping for download anything in the machine
+                    args '-v $HOME/.m2:/root/.m2'  //volume mapping for download anything in the machine
                 }
             }
             steps {
