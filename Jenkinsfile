@@ -19,8 +19,6 @@ pipeline {
             steps {
                 script {
                     echo "debug checking current location inside container"
-                    echo $PWD
-                    sh 'ls -al' //debug
                 	app = docker.build("gahung206/selenium-docker") //build the image and store in the variable `app`
                 }
             }
